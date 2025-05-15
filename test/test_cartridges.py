@@ -36,7 +36,7 @@ class TestCartridges():
             calculate_discount(cartridges)
         assert str(error_info.value) == 'The minimum order quantity is 5.'
 
-    # Data type-based edge casese
+    # Data type-based edge cases
     @pytest.mark.parametrize('cartridges', [
         ('Hello'), ('167.3')
     ])

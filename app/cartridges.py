@@ -4,5 +4,5 @@ def calculate_discount(cartridges):
     if cartridges < 5:
         raise ValueError('The minimum order quantity is 5.')
     if cartridges >= 100:
-        return 0.20
+        return 0.2
     return 0.0
