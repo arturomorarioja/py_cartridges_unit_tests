@@ -28,13 +28,22 @@ class TestCartridges():
     #   
 
     @pytest.mark.parametrize('cartridges', [
-        (0), (1), (2), (3), (4),        # Invalid equivalence partition: 0-4
-        (-1), (-10), (-167)             # Edge cases
+        (-15), (-2), (-1),      # Invalid equivalence partition: MIN INTEGER- -1
+        (0),                    # Invalid equivalence partition: 0
+        (1), (2), (3), (4),     # Invalid equivalence partition: 1-4
+        (-10), (-167)           # Edge cases
     ])
     def test_cartridges_fails(self, cartridges):
         with pytest.raises(ValueError) as error_info:
             calculate_discount(cartridges)
         assert str(error_info.value) == 'The minimum order quantity is 5.'
+
+    @pytest.mark.parametrize('cartridges, discount', [
+        (167.3, 0.2),   # Edge case: implies float to int conversion
+        ("167", 0.2)    # Edge case: implies string to int conversion
+    ])
+    def test_cartridges_passes_wrong_data_type(self, cartridges, discount):
+        assert calculate_discount(cartridges) == discount
 
     # Data type-based edge cases
     @pytest.mark.parametrize('cartridges', [
